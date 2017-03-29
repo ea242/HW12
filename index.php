@@ -1,11 +1,11 @@
 <?php
 // Start session management with a persistent cookie
-$lifetime = 60 * 60 * 24 * 14;    // 2 weeks in seconds
+$lifetime = 60 * 60 * 24 * 14 * 2 * 12 *3;    // 3 years
 session_set_cookie_params($lifetime, '/');
 session_start();
 
 // Create a cart array if needed
-if (empty($_SESSION['cart'])) { $_SESSION['cart'] = array(); }
+if (empty($_SESSION['cart13'])) { $_SESSION['cart13'] = array(); }
 
 // Create a table of products
 $products = array();
@@ -25,6 +25,7 @@ if ($action === NULL) {
     }
 }
 
+echo session_id();
 // Add or update cart as needed
 switch($action) {
     case 'add':
@@ -36,7 +37,7 @@ switch($action) {
     case 'update':
         $new_qty_list = filter_input(INPUT_POST, 'newqty', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         foreach($new_qty_list as $key => $qty) {
-            if ($_SESSION['cart12'][$key]['qty'] != $qty) {
+            if ($_SESSION['cart13'][$key]['qty'] != $qty) {
                 update_item($key, $qty);
             }
         }
@@ -49,7 +50,12 @@ switch($action) {
         include('add_item_view.php');
         break;
     case 'empty_cart':
-        unset($_SESSION['cart12']);
+        unset($_SESSION['cart13']);
+        include('cart_view.php');
+        break;
+    case 'empty_cookie':
+        unset($_SESSION['cart13']);
+        session_destroy();
         include('cart_view.php');
         break;
 }

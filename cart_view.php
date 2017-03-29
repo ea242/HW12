@@ -1,5 +1,5 @@
-<!DOCTYP">
-<htm">
+<!DOCTYPE>
+<html>
 <head>
     <title>My Guitar Shop</title>
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -11,7 +11,7 @@
     <main>
 
         <h1>Your Cart</h1>
-        <?php if (empty($_SESSION['cart12']) || count($_SESSION['cart12']) == 0) : ?>
+        <?php if (empty($_SESSION['cart13']) || count($_SESSION['cart13']) == 0) : ?>
             <p>There are no items in your cart.</p>
         <?php else: ?>
             <form action="." method="post">
@@ -23,7 +23,7 @@
                     <th class="right">Quantity</th>
                     <th class="right">Item Total</th>
                 </tr>
-            <?php foreach( $_SESSION['cart12'] as $key => $item ) :
+            <?php foreach( $_SESSION['cart13'] as $key => $item ) :
                 $cost  = number_format($item['cost'],  2);
                 $total = number_format($item['total'], 2);
             ?>
@@ -61,6 +61,7 @@
         <?php endif; ?>
         <p><a href=".?action=show_add_item">Add Item</a></p>
         <p><a href=".?action=empty_cart">Empty Cart</a></p>
+        <p><a href=".?action=empty_cookie">End Session and Delete Cookie</a></p>
 
     </main>
 </body>
