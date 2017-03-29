@@ -5,7 +5,7 @@ session_set_cookie_params($lifetime, '/');
 session_start();
 
 // Create a cart array if needed
-if (empty($_SESSION['cart'])) { $_SESSION['cart'] = array(); }
+if (empty($_SESSION['cart12'])) { $_SESSION['cart12'] = array(); }
 
 // Create a table of products
 $products = array();
@@ -15,7 +15,6 @@ $products['MMS-3408'] = array('name' => 'Clarinet', 'cost' => '299.50');
 
 // Include cart functions
 require_once('cart.php');
-
 // Get the action to perform
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
@@ -30,14 +29,14 @@ switch($action) {
     case 'add':
         $product_key = filter_input(INPUT_POST, 'productkey');
         $item_qty = filter_input(INPUT_POST, 'itemqty');
-        add_item($product_key, $item_qty);
+        add_item($_SESSION['cart12'], $product_key, $item_qty);
         include('cart_view.php');
         break;
     case 'update':
         $new_qty_list = filter_input(INPUT_POST, 'newqty', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         foreach($new_qty_list as $key => $qty) {
             if ($_SESSION['cart12'][$key]['qty'] != $qty) {
-                update_item($key, $qty);
+                update_item($_SESSION['cart12'], $key, $qty);
             }
         }
         include('cart_view.php');

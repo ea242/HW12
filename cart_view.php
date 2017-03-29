@@ -1,5 +1,5 @@
-<!DOCTYP">
-<htm">
+<!DOCTYPE>
+<html>
 <head>
     <title>My Guitar Shop</title>
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -11,7 +11,8 @@
     <main>
 
         <h1>Your Cart</h1>
-        <?php if (empty($_SESSION['cart12']) || count($_SESSION['cart12']) == 0) : ?>
+        <?php 
+        if (empty($_SESSION['cart12']) || count($_SESSION['cart12']) == 0) : ?>
             <p>There are no items in your cart.</p>
         <?php else: ?>
             <form action="." method="post">
@@ -46,7 +47,7 @@
             <?php endforeach; ?>
                 <tr id="cart_footer">
                     <td colspan="3"><b>Subtotal</b></td>
-                <td>$<?php echo get_subtotal(); ?></td>
+                <td>$<?php echo get_subtotal($_SESSION['cart12'],2); ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" class="right">
